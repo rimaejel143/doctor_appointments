@@ -17,7 +17,34 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Doctor Appointments App ',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primaryColor: Color(0xFF00897B),
+        scaffoldBackgroundColor: Color(0xFFE0F2F1),
+
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color(0xFF00897B),
+          brightness: Brightness.light,
+        ),
+
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFF00897B),
+          foregroundColor: Colors.white,
+          centerTitle: true,
+          elevation: 0,
+        ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF00897B),
+            padding: EdgeInsets.symmetric(horizontal: 28, vertical: 13),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            textStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+
       routes: {
         '/': (context) => const HomePage(),
         '/book': (context) => const BookAppointmentPage(),
