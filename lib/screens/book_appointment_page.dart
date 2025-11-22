@@ -38,7 +38,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Doctor info on top
+              // Doctor info
               Container(
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
@@ -203,7 +203,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     );
   }
 
-  // ========= Date Picker =========
+  // Date Picker
   Future<void> pickDate() async {
     DateTime? date = await showDatePicker(
       context: context,
@@ -222,7 +222,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     if (date != null) setState(() => selectedDate = date);
   }
 
-  // ========= Time Picker =========
+  // Time Picker
   Future<void> pickTime() async {
     TimeOfDay? time = await showTimePicker(
       context: context,
@@ -231,7 +231,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     if (time != null) setState(() => selectedTime = time);
   }
 
-  // ========= Picker UI Box =========
+  // Picker UI Box
   Widget pickerBox({required IconData icon, required String text}) {
     return Container(
       padding: const EdgeInsets.all(14),

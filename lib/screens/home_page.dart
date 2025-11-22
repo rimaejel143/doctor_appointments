@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // قائمة الدكاترة
+  //doctors
   List<Map<String, String>> doctors = [
     {
       "name": "Dr. John Doe",
