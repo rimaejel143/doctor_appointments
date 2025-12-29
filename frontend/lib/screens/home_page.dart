@@ -142,7 +142,41 @@ class _HomePageState extends State<HomePage> {
          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
 
         ),
-        
+        subtitle: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(specialty, style: TextStyle(color: Colors.grey[700])),
+            const SizedBox(height: 5),
+            Row(
+              children: [
+                const Icon(Icons.access_time,
+                    size: 18, color: Color(0xFF00897B)),
+                const SizedBox(width: 5),
+                Text(
+                  availability,
+                  style: const TextStyle(fontSize: 13),
+                ),
+              ],
+            ),
+          ],
+
+        ),
+        trailing: 
+        const Icon(Icons.arrow_forward_ios, 
+        color: Colors.grey),
+        onTap: () {
+           Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => DoctorDetailsPage(
+                name: name,
+                specialty: specialty,
+                availability: availability,
+              ),
+            ),
+          );
+
+        },
        ),
 
       );
