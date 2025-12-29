@@ -111,7 +111,43 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
               ),
 
               const SizedBox(height: 25),
+     
+            const Text(
+                "Choose Date",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 6),
+              GestureDetector(
+                onTap: pickDate,
+                child: pickerBox(
+                  icon: Icons.calendar_month,
+                  text: selectedDate == null
+                      ? "Select Date"
+                      : "${selectedDate!.year}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.day.toString().padLeft(2, '0')}",
+                ),
+              ),
 
+              const SizedBox(height: 25),
+
+              const Text(
+                "Choose Time",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 6),
+              GestureDetector(
+                onTap: pickTime,
+                child: pickerBox(
+                  icon: Icons.access_time,
+                  text: selectedTime == null
+                      ? "Select Time"
+                      : selectedTime!.format(context),
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
+
+ 
 
           ],
         ),
