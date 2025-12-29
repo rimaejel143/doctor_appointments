@@ -70,7 +70,9 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                   ],
                 ),
 
-            )
+            ),
+             const SizedBox(height: 25),
+
           ],
         ),
       ),
