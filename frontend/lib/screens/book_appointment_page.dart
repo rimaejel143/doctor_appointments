@@ -216,13 +216,31 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     if (date != null) setState(() => selectedDate = date);
   }
 
-  Future<void> pickTime() async {
+ 
+ Future<void> pickTime() async {
     TimeOfDay? time =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
     if (time != null) setState(() => selectedTime = time);
   }
 
+  Widget pickerBox({required IconData icon, required String text}) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8),
+        ],
+      ),
 
-
-
+        child: Row(
+        children: [
+          Icon(icon, color: const Color(0xFF00897B), size: 28),
+          const SizedBox(width: 10),
+          Text(text, style: const TextStyle(fontSize: 16)),
+        ],
+      ),
+    );
+}
 }
