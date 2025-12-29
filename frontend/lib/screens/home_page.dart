@@ -94,10 +94,58 @@ class _HomePageState extends State<HomePage> {
             ),
              const SizedBox(height: 20),
 
+            Expanded(
+              child: isLoading? const Center(child: 
+              CircularProgressIndicator())
+              : ListView(children: 
+              doctors.where((doc) => doc["name"].toLowerCase().contains(searchQuery) || doc["specialty"].toLowerCase().contains(searchQuery)).map((doc) => doctorCard(context, 
+              doc["name"],
+              doc["specialty"],
+              doc["availability"],)).toList(),
+              ),
+               ),
           ],
         ),
 
         ),
     );
   }
+
+     Widget doctorCard(
+     BuildContext context,
+     String name,
+     String specialty,
+     String availability,
+
+     ){
+      return Container(
+         margin: const EdgeInsets.only(bottom: 15),
+        decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 15,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+       child: ListTile(
+         contentPadding: const EdgeInsets.all(15),
+        leading: const CircleAvatar(
+          radius: 30,
+          backgroundColor: Color(0xFF00897B),
+          child: Icon(Icons.person, color: Colors.white, size: 30),
+        ),
+        title: Text(name,
+         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
+        ),
+        
+       ),
+
+      );
+     }
+
 }
