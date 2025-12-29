@@ -145,9 +145,13 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
               ),
 
               const SizedBox(height: 40),
-
-
  
+               Center(
+                child: ElevatedButton(
+                  onPressed: submitAppointment,
+                  child: const Text("Confirm Appointment"),
+                ),
+              ),
 
           ],
         ),
@@ -155,4 +159,54 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
       ),
     );
   }
+   Future<void> submitAppointment() async {
+    if (patientNameController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        selectedDate == null ||
+        selectedTime == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please fill all fields."),
+          backgroundColor: Color(0xFF00897B),
+        ),
+      );
+      return;
+        }
+        final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final int doctorId = args["doctor_id"];
+
+    final body = {
+      "doctor_id": doctorId,
+      "patient_name": patientNameController.text,
+      "phone": phoneController.text,
+      "date":
+          "${selectedDate!.year}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.day.toString().padLeft(2, '0')}",
+      "time":
+          "${selectedTime!.hour.toString().padLeft(2, '0')}:${selectedTime!.minute.toString().padLeft(2, '0')}",
+    };
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {"Content-Type": "application/json"},
+        body: json.encode(body),
+      );
+
+      if (response.statusCode == 201) {
+        Navigator.pushNamed(context, "/confirm");
+      } else {
+        throw Exception("Failed to book appointment");
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Error booking appointment."),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+
+
+   }
+
+
 }
