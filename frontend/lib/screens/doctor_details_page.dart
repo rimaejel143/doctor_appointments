@@ -90,7 +90,16 @@ class DoctorDetailsPage extends StatelessWidget {
               ),
 
 
-           )
+           ),
+           const Spacer(),
+
+           ElevatedButton(onPressed: (){
+            Navigator.pushNamed(context, '/book', arguments: {
+              "doctor_id": doctorId,
+              "doctor_name": name,
+            },);
+           }, child: const Text("Book Apointment"),),
+           const SizedBox(height: 25),
 
         ],),),
 
