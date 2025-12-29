@@ -169,6 +169,7 @@ class _HomePageState extends State<HomePage> {
             context,
             MaterialPageRoute(
               builder: (_) => DoctorDetailsPage(
+                
                 name: name,
                 specialty: specialty,
                 availability: availability,
