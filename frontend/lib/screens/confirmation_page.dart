@@ -33,9 +33,30 @@ class ConfirmationPage extends StatelessWidget {
                 color: Color(0xFF00897B),
                 size: 90,
               ),
+          ),
+           const SizedBox(height: 30),
+
+            const Text(
+              "Your Appointment is Confirmed!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF00897B),
+              ),
+            ),
+
+            const SizedBox(height: 15),
+            const Text(
+              "Thank you for booking your appointment.\nWe look forward to seeing you!",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.black54),
+            ),
+
+            const Spacer(),
 
 
-          )
+
         ],
       ),
     ),
