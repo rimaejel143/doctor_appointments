@@ -99,9 +99,11 @@ class _HomePageState extends State<HomePage> {
               CircularProgressIndicator())
               : ListView(children: 
               doctors.where((doc) => doc["name"].toLowerCase().contains(searchQuery) || doc["specialty"].toLowerCase().contains(searchQuery)).map((doc) => doctorCard(context, 
+              doc["id"],
               doc["name"],
               doc["specialty"],
-              doc["availability"],)).toList(),
+              doc["availability"],
+              )).toList(),
               ),
                ),
           ],
@@ -113,6 +115,7 @@ class _HomePageState extends State<HomePage> {
 
      Widget doctorCard(
      BuildContext context,
+     int doctorId,
      String name,
      String specialty,
      String availability,
@@ -169,7 +172,7 @@ class _HomePageState extends State<HomePage> {
             context,
             MaterialPageRoute(
               builder: (_) => DoctorDetailsPage(
-                
+                doctorId: doctorId,
                 name: name,
                 specialty: specialty,
                 availability: availability,
