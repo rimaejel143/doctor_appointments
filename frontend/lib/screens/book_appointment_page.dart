@@ -205,8 +205,24 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
       );
     }
 
-
    }
+   Future<void> pickDate() async {
+    DateTime? date = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+    );
+    if (date != null) setState(() => selectedDate = date);
+  }
+
+  Future<void> pickTime() async {
+    TimeOfDay? time =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (time != null) setState(() => selectedTime = time);
+  }
+
+
 
 
 }
