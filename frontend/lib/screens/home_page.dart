@@ -51,13 +51,53 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: const Color(0xFFF1F9F8),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF1F9F8),
-        title: const Text("Doctor Apoointments"),
+        title: const Text("Doctor Apoointments",
         style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
               color: Colors.white,
         ),
       ),
+      centerTitle: true,
+      ),
+      
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(18),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+
+                  )
+                ],
+              ),
+              child: TextField(
+                onChanged: (value){
+                  setState(() {
+                    searchQuery = value.toLowerCase();
+                  });
+                },
+                 decoration: const InputDecoration(
+                  hintText: "Search doctors...",
+                  border: InputBorder.none,
+                  icon: Icon(Icons.search, color: Colors.grey),
+                 ),
+              ),
+            ),
+             const SizedBox(height: 20),
+
+          ],
+        ),
+
+        ),
     );
   }
 }
