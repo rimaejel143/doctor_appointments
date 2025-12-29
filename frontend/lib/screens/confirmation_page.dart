@@ -55,6 +55,18 @@ class ConfirmationPage extends StatelessWidget {
 
             const Spacer(),
 
+              ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  "/",
+                  (route) => false,
+                );
+              },
+              child: const Text("Back to Home"),
+            ),
+
+            const SizedBox(height: 30),
 
 
         ],
