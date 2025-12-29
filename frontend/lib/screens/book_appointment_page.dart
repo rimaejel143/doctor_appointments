@@ -73,6 +73,46 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
             ),
              const SizedBox(height: 25),
 
+              const Text(
+                "Patient Name",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 6),
+              TextField(
+                controller: patientNameController,
+                decoration: InputDecoration(
+                  hintText: "Enter your name",
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+             const Text(
+                "Phone Number",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 6),
+              TextField(
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  hintText: "Enter phone number",
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+
           ],
         ),
       ),
