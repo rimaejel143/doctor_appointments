@@ -1,7 +1,45 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class AppointmentsListPage extends StatelessWidget {
+class AppointmentsListPage extends StatefulWidget {
   const AppointmentsListPage({super.key});
+
+  @override
+  State<AppointmentsListPage> createState() => _AppointmentsListPageState();
+}
+
+class _AppointmentsListPageState extends State<AppointmentsListPage> {
+  List<dynamic> appointments = [];
+  bool isLoading = true;
+
+  final String apiUrl = "http://localhost:3000/appointments";
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAppointments();
+  }
+
+  Future<void> fetchAppointments() async {
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          appointments = data["data"];
+          isLoading = false;
+        });
+      } else {
+        throw Exception("Failed to load appointments");
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +50,27 @@ class AppointmentsListPage extends StatelessWidget {
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
       ),
-
-      body: ListView.builder(
-        padding: const EdgeInsets.all(20),
-        itemCount: 5, // You can replace with real data later
-        itemBuilder: (context, index) {
-          return appointmentCard(
-            doctorName: "Dr. John Doe",
-            department: "Cardiology",
-            date: "Dec ${10 + index}, 2024",
-          );
-        },
-      ),
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : appointments.isEmpty
+          ? const Center(
+              child: Text(
+                "No appointments found.",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.all(20),
+              itemCount: appointments.length,
+              itemBuilder: (context, index) {
+                final appt = appointments[index];
+                return appointmentCard(
+                  doctorName: appt["doctor_name"],
+                  department: appt["specialty"],
+                  date: "${appt["date"]} • ${appt["time"]}",
+                );
+              },
+            ),
     );
   }
 
@@ -47,18 +94,15 @@ class AppointmentsListPage extends StatelessWidget {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.all(18),
-
-        leading: CircleAvatar(
+        leading: const CircleAvatar(
           radius: 30,
-          backgroundColor: const Color(0xFF00897B),
-          child: const Icon(Icons.person, color: Colors.white, size: 28),
+          backgroundColor: Color(0xFF00897B),
+          child: Icon(Icons.person, color: Colors.white, size: 28),
         ),
-
         title: Text(
           doctorName,
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,7 +124,6 @@ class AppointmentsListPage extends StatelessWidget {
             ),
           ],
         ),
-
         trailing: Icon(
           Icons.arrow_forward_ios,
           color: Colors.grey[600],

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-
 class BookAppointmentPage extends StatefulWidget {
   const BookAppointmentPage({super.key});
 
@@ -11,7 +10,7 @@ class BookAppointmentPage extends StatefulWidget {
 }
 
 class _BookAppointmentPageState extends State<BookAppointmentPage> {
-   DateTime? selectedDate;
+  DateTime? selectedDate;
   TimeOfDay? selectedTime;
 
   final TextEditingController patientNameController = TextEditingController();
@@ -21,7 +20,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
 
   @override
   Widget build(BuildContext context) {
-     final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
 
     final int doctorId = args["doctor_id"];
     final String doctorName = args["doctor_name"];
@@ -30,34 +29,36 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
       backgroundColor: const Color(0xFFF1F9F8),
       appBar: AppBar(
         backgroundColor: const Color(0xFFF1F9F8),
-        title: const Text("Book Appointment",
-        style: TextStyle(color: Colors.white),),
+        title: const Text(
+          "Book Appointment",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
-      body: Padding(padding: const EdgeInsets.all(20),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 8,
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 8,
+                    ),
+                  ],
                 ),
-                ],
-              ),
-              child: Row(
+                child: Row(
                   children: [
                     const CircleAvatar(
                       radius: 35,
                       backgroundColor: Color(0xFF00897B),
-                      child: Icon(Icons.person,
-                          color: Colors.white, size: 35),
+                      child: Icon(Icons.person, color: Colors.white, size: 35),
                     ),
                     const SizedBox(width: 15),
                     Text(
@@ -69,9 +70,8 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
                     ),
                   ],
                 ),
-
-            ),
-             const SizedBox(height: 25),
+              ),
+              const SizedBox(height: 25),
 
               const Text(
                 "Patient Name",
@@ -92,7 +92,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
 
               const SizedBox(height: 20),
 
-             const Text(
+              const Text(
                 "Phone Number",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
@@ -111,8 +111,8 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
               ),
 
               const SizedBox(height: 25),
-     
-            const Text(
+
+              const Text(
                 "Choose Date",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
@@ -145,21 +145,21 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
               ),
 
               const SizedBox(height: 40),
- 
-               Center(
+
+              Center(
                 child: ElevatedButton(
                   onPressed: submitAppointment,
                   child: const Text("Confirm Appointment"),
                 ),
               ),
-
-          ],
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
-   Future<void> submitAppointment() async {
+
+  Future<void> submitAppointment() async {
     if (patientNameController.text.isEmpty ||
         phoneController.text.isEmpty ||
         selectedDate == null ||
@@ -171,8 +171,8 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
         ),
       );
       return;
-        }
-        final args = ModalRoute.of(context)!.settings.arguments as Map;
+    }
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
     final int doctorId = args["doctor_id"];
 
     final body = {
@@ -204,9 +204,9 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
         ),
       );
     }
+  }
 
-   }
-   Future<void> pickDate() async {
+  Future<void> pickDate() async {
     DateTime? date = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -216,10 +216,11 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
     if (date != null) setState(() => selectedDate = date);
   }
 
- 
- Future<void> pickTime() async {
-    TimeOfDay? time =
-        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+  Future<void> pickTime() async {
+    TimeOfDay? time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
     if (time != null) setState(() => selectedTime = time);
   }
 
@@ -234,7 +235,7 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
         ],
       ),
 
-        child: Row(
+      child: Row(
         children: [
           Icon(icon, color: const Color(0xFF00897B), size: 28),
           const SizedBox(width: 10),
@@ -242,5 +243,5 @@ class _BookAppointmentPageState extends State<BookAppointmentPage> {
         ],
       ),
     );
-}
+  }
 }
